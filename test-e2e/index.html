@@ -1,0 +1,21 @@
+<!doctype html>
+<head>
+    <link rel="stylesheet" href="angular-material/angular-material.css">
+
+    <script type="text/javascript" src="angular/angular.js"></script>
+    <script type="text/javascript" src="angular-resource/angular-resource.js"></script>
+
+    <script type="text/javascript" src="angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="angular-material/angular-material.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="ng-resource-decorator.js"></script>
+    <script type="text/javascript" src="ng-resource-explorer-directive.js"></script>
+
+    <script type="text/javascript" src="src/test-app.js"></script>
+</head>
+<body ng-app="ngResourceExplorerTest" ng-controller="ngResourceExplorerTestCtrl as vm">
+    <resource-explorer resource="vm.resource" action="get"></resource-explorer>
+</body>
+</html>

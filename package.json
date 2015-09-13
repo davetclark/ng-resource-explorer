@@ -1,0 +1,25 @@
+{
+  "name": "ng-resource-explorer",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.9.0",
+    "bower": "~1.5.2",
+    "gulp-bower": "0.0.10",
+    "gulp-load-plugins": "~1.0.0-rc.1",
+    "browser-sync": "~2.9.3",
+    "jasmine-core": "~2.3.4",
+    "karma-jasmine": "~0.3.6",
+    "karma": "~0.13.9",
+    "phantomjs": "~1.9.18",
+    "karma-phantomjs-launcher": "~0.2.1",
+    "karma-coverage": "~0.5.2",
+    "eslint": "~1.4.1"
+  }
+}

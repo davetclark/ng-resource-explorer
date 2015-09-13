@@ -1,0 +1,23 @@
+{
+  "name": "ng-resource-explorer",
+  "version": "0.0.0",
+  "authors": [
+    "Dave Clark <davetclark@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-material": "~0.11.0",
+    "angular-resource": "~1.4.5"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.5"
+  }
+}

@@ -1,0 +1,48 @@
+<md-content>
+    <h3>{{vm.url}} {{vm.action}} {{vm.method}}</h3>
+    <h4>Parameters</h4>
+    <div layout="row">
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr ng-repeat="(param, val) in vm.urlParams">
+                <td>{{param}}</td>
+                <td><md-input-container>
+                    <input ng-model="vm.urlParams[param]"></input>
+                </md-input-container></td>
+            </tr>
+            <tr ng-repeat="(param, val) in vm.queryParams">
+                <td>{{param}}</td>
+                <td><md-input-container>
+                    <input ng-model="vm.queryParams[param]"></input>
+                </md-input-container></td>
+            </tr>
+        </table>
+        <md-content><code>
+            {
+                <div ng-repeat="(param, val) in vm.urlParams" ng-show="val !== null">&nbsp;&nbsp;{{param}}: "{{val}}"</div>
+                <div ng-repeat="(param, val) in vm.queryParams" ng-show="val !== null">&nbsp;&nbsp;{{param}}: "{{val}}"</div>
+            }
+        </code></md-content>
+    </div>
+    <h4>Response</h4>
+    <md-button ng-click="vm.go()">Go</md-button>
+    <div layout="row">
+        <table>
+            <tr>
+                <th>URL</th>
+                <th>Code</th>
+                <th>Response Body</th>
+                <th>Response Headers</th>
+            </tr>
+            <tr>
+                <td>URL</td>
+                <td>{{vm.response.status}}</td>
+                <td><pre>{{vm.response.data | json}}</pre></td>
+                <td>{{rm.response.headers()}}</td>
+            </tr>
+        </table>
+    </div>
+</md-content>
