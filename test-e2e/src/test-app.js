@@ -23,19 +23,3 @@ angular.module('ngResourceExplorerTest').controller('ngResourceExplorerTestCtrl'
         vm.resource = Channels;
     }
 ]);
-
-angular.module('ngResourceExplorerTest').run(['$resource', function ($resource) {
-    var User = $resource('/user/:userId/:otherUrlParam', {
-        userId: '@id',
-        otherUrlParam: 'dude',
-        otherData: 'test',
-        undefinedData: undefined
-    }, {
-        get: {
-            method: 'GET',
-            headers: {
-                testHeader: 'woo'
-            }
-        }
-    });
-}]);

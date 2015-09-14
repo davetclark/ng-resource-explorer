@@ -14,6 +14,32 @@ angular.module('ngResourceExplorer').config(['$provide', '$resourceProvider', fu
         }
 
         return function (url, paramDefaults, actions, options) {
+            // Add our own interceptors so we can get all of the response data, not just the resource
+            angular.forEach(actions, function (value, key) {
+                var oldInterceptor = value.interceptor;
+                value.interceptor = {
+                    response: function (response) {
+                        response.resource.$explorer = {
+                            url: response.config.url,
+                            data: response.data,
+                            headers: response.headers(),
+                            status: response.status,
+                            statusText: response.statusText
+                        }
+                        if (oldInterceptor && typeof oldInterceptor.response === 'function') {
+                            return oldInterceptor.response(response);
+                        }
+                        return response.resource;
+                    },
+                    responseError: function (rejection) {
+                        if (oldInterceptor && typeof oldInterceptor.responseError === 'function') {
+                            return oldInterceptor.responseError(rejection);
+                        }
+                        return rejection;
+                    }
+                };
+            });
+
             var Resource = $delegate(url, paramDefaults, actions, options);
             Resource.explorer = {
                 url: url,
@@ -41,7 +67,7 @@ angular.module('ngResourceExplorer').config(['$provide', '$resourceProvider', fu
             });
 
             // Merge the custom actions with the default actions
-            Resource.explorer.actions = angular.extend({}, $resourceProvider.defaults.actions, actions);
+            Resource.explorer.actions = angular.merge({}, $resourceProvider.defaults.actions, actions);
 
             // Merge the options with default options, and don't duplicate the actions data
             Resource.explorer.options = angular.extend({}, $resourceProvider.defaults, options);

@@ -17,24 +17,26 @@ angular.module('ngResourceExplorer').directive('resourceExplorer', [function () 
 
             vm.url = ex.url;
             vm.action = $scope.action;
-            vm.method = ex.actions[vm.action].method;
+            vm.actionData = ex.actions[vm.action];
 
             vm.urlParams = angular.extend({}, ex.urlParams);
             vm.queryParams = angular.extend({}, ex.queryParams);
-
-            vm.response = {};
+            vm.combined = function () {
+                return angular.extend({}, vm.urlParams, vm.queryParams);
+            }
 
             vm.go = function () {
                 var params = angular.extend({}, vm.urlParams, vm.queryParams);
-                console.log(params);
                 $scope.resource[vm.action](params).$promise.then(function (resource) {
-                    vm.response.data = resource;
+                    vm.response = resource.$explorer;
                 }, function (response) {
-                    vm.response = angular.extend(vm.response, response);
-                    console.log(response);
-                    console.log(response.headers());
+                    vm.response = response;
                 });
             };
+
+            vm.click = function () {
+                console.log('click')
+            }
 
             //
             // $scope.getMethod = function (action) {

@@ -1,48 +1,70 @@
-<md-content>
-    <h3>{{vm.url}} {{vm.action}} {{vm.method}}</h3>
-    <h4>Parameters</h4>
-    <div layout="row">
-        <table>
-            <tr>
-                <th>Parameter</th>
-                <th>Value</th>
-            </tr>
-            <tr ng-repeat="(param, val) in vm.urlParams">
-                <td>{{param}}</td>
-                <td><md-input-container>
-                    <input ng-model="vm.urlParams[param]"></input>
-                </md-input-container></td>
-            </tr>
-            <tr ng-repeat="(param, val) in vm.queryParams">
-                <td>{{param}}</td>
-                <td><md-input-container>
-                    <input ng-model="vm.queryParams[param]"></input>
-                </md-input-container></td>
-            </tr>
-        </table>
-        <md-content><code>
-            {
-                <div ng-repeat="(param, val) in vm.urlParams" ng-show="val !== null">&nbsp;&nbsp;{{param}}: "{{val}}"</div>
-                <div ng-repeat="(param, val) in vm.queryParams" ng-show="val !== null">&nbsp;&nbsp;{{param}}: "{{val}}"</div>
-            }
-        </code></md-content>
+<md-content layout="column">
+    <div ng-click="vm.click()">
+        <md-toolbar>
+            <div class="md-toolbar-tools"><h3><span>{{vm.action}}({{vm.actionData.method}}): {{vm.url}}</span></h3></div>
+        </md-toolbar>
     </div>
-    <h4>Response</h4>
-    <md-button ng-click="vm.go()">Go</md-button>
-    <div layout="row">
-        <table>
-            <tr>
-                <th>URL</th>
-                <th>Code</th>
-                <th>Response Body</th>
-                <th>Response Headers</th>
-            </tr>
-            <tr>
-                <td>URL</td>
-                <td>{{vm.response.status}}</td>
-                <td><pre>{{vm.response.data | json}}</pre></td>
-                <td>{{rm.response.headers()}}</td>
-            </tr>
-        </table>
-    </div>
+    <md-card><md-card-content>
+        <div layout="column">
+            <div layout="row" layout-padding>
+                <span flex=20><h4>Parameter</h4></span>
+                <span flex=40><h4>Headers</h4></span>
+                <span flex=40><h4>Model</h4></span>
+            </div>
+            <md-divider>
+            <div layout="row" layout-padding>
+                <div flex=20 layout="column">
+                    <div ng-repeat="(param, val) in vm.urlParams">
+                        <span>
+                            <md-input-container>
+                                <label>{{param}}</label>
+                                <input ng-model="vm.urlParams[param]"></input>
+                            </md-input-container>
+                        </span>
+                    </div>
+                    <div ng-repeat="(param, val) in vm.queryParams">
+                        <span>
+                            <md-input-container>
+                                <label>{{param}}</label>
+                                <input ng-model="vm.queryParams[param]"></input>
+                            </md-input-container>
+                        </span>
+                    </div>
+                </div>
+                <md-content flex=40>
+                    <pre>{{vm.actionData.headers | json}}</pre>
+                </md-content>
+                <md-content flex=40><code>
+                    <pre>{{vm.combined() | json}}</pre>
+                </code></md-content>
+            </div>
+        </div>
+    </md-card-content></md-card>
+    <md-card>
+        <md-card-content>
+            <md-button ng-show="vm.response === undefined" class="md-raised" ng-click="vm.go()">
+                Get Response
+            </md-button>
+        </md-card-content>
+        <div ng-show="vm.response" layout="column">
+            <div>
+                {{vm.response.url}}
+                <md-button class="md-raised" ng-click="vm.go()">
+                    Re-Send Request
+                </md-button>
+            </div>
+            <div layout="row" layout-padding>
+                <span flex=10><h4>Code</h4></span>
+                <span flex=20><h4>Status</h4></span>
+                <span flex=40><h4>Body</h4></span>
+                <span flex><h4>Headers</h4></span>
+            </div>
+            <div layout="row" layout-padding>
+                <span flex=10>{{vm.response.status}}</span>
+                <md-content flex=20>{{vm.response.statusText}}</md-content>
+                <md-content flex=40><pre>{{vm.response.data | json}}</pre></md-content>
+                <md-content flex=30><pre>{{vm.response.headers | json}}</pre></md-content>
+            </div>
+        </div>
+    </md-card>
 </md-content>
