@@ -7,13 +7,7 @@
     <md-card><md-card-content>
         <div layout="column">
             <div layout="row" layout-padding>
-                <span flex=20><h4>Parameter</h4></span>
-                <span flex=40><h4>Headers</h4></span>
-                <span flex=40><h4>Model</h4></span>
-            </div>
-            <md-divider>
-            <div layout="row" layout-padding>
-                <div flex=20 layout="column">
+                <!-- <div flex=20 layout="column">
                     <div ng-repeat="(param, val) in vm.urlParams">
                         <span>
                             <md-input-container>
@@ -30,6 +24,17 @@
                             </md-input-container>
                         </span>
                     </div>
+                </div> -->
+                URL
+                <div flex layout="column">
+                    <md-input-container>
+                        <label>Parameters</label>
+                        <textarea></textarea>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Body Data</label>
+                        <textarea></textarea>
+                    </md-input-container>
                 </div>
                 <md-content flex=40>
                     <pre>{{vm.actionData.headers | json}}</pre>
